@@ -19,10 +19,10 @@ public class JoinRequest {
     @NotBlank(message = "닉네임이 비어있습니다.")
     private String nickName;
 
-    public User toEntity(String encodedPassword) {
+    public User toEntity() {
         return User.builder()
                 .loginId(this.loginId)
-                .password(encodedPassword)
+                .password(this.password)
                 .nickName(this.nickName)
                 .role(UserRole.USER)
                 .build();

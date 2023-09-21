@@ -18,7 +18,7 @@ public class UserService {
     private final UserRepository userRepository;
 
     // Spring Security를 사용한 로그인 구현 시 사용
-    private final BCryptPasswordEncoder encoder;
+    //private final BCryptPasswordEncoder encoder;
 
     //회원가입 시, 아이디 중복여부 확인
     public boolean checkLoginIdDuplicate(String loginId) {
@@ -33,7 +33,7 @@ public class UserService {
     //JoinRequest를 입력받아 User로 변환 후 저장
     //이 과정에서 비밀번호는 암호화되어 저장
     public void join(JoinRequest request) {
-        userRepository.save(request.toEntity(encoder.encode(request.getPassword())));
+        userRepository.save(request.toEntity());
     }
 
     //로그인 시, 아이디와 비밀번호가 일치하면 User return

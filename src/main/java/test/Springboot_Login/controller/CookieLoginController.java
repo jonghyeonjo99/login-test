@@ -18,7 +18,7 @@ import test.Springboot_Login.service.UserService;
 
 @Controller
 @RequiredArgsConstructor
-@RequestMapping("cookie-login")
+@RequestMapping("/cookie-login")
 public class CookieLoginController {
 
     private final UserService userService;
