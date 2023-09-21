@@ -2,8 +2,8 @@ package test.Springboot_Login.controller;
 
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
-import lombok.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -48,7 +48,7 @@ public class CookieLoginController {
     }
 
     @PostMapping("/join")
-    public String join(@Value @ModelAttribute JoinRequest joinRequest, BindingResult bindingResult, Model model) {
+    public String join(@Valid @ModelAttribute JoinRequest joinRequest, BindingResult bindingResult, Model model) {
         model.addAttribute("loginType", "cookie-login");
         model.addAttribute("pageName", "쿠키 로그인");
 
