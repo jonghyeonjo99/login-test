@@ -1,4 +1,3 @@
-/*
 package test.Springboot_Login.config;
 
 import org.springframework.context.annotation.Bean;
@@ -12,4 +11,4 @@ public class BCryptConfig {
         return new BCryptPasswordEncoder();
     }
 }
-*/
+
