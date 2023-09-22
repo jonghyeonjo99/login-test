@@ -15,6 +15,11 @@ import test.Springboot_Login.dto.JoinRequest;
 import test.Springboot_Login.dto.LoginRequest;
 import test.Springboot_Login.service.UserService;
 
+import java.util.Enumeration;
+import java.util.HashMap;
+import java.util.Hashtable;
+import java.util.Map;
+
 @Controller
 @RequiredArgsConstructor
 @RequestMapping("/session-login")
@@ -109,6 +114,8 @@ public class SessionLoginController {
         session.setAttribute("userId", user.getId()); //세션에 userId 삽입
         session.setMaxInactiveInterval(1800); //세션 1800초(30분) 유지
 
+        sessionList.put(session.getId(),session);
+
         return "redirect:/session-login";
     }
 
@@ -119,6 +126,7 @@ public class SessionLoginController {
 
         HttpSession session = request.getSession(false);
         if(session != null) {
+            sessionList.remove(session.getId());
             session.invalidate();
         }
         return "redirect:/session-login";
@@ -156,5 +164,19 @@ public class SessionLoginController {
         }
 
         return "admin";
+    }
+
+    public static Hashtable sessionList = new Hashtable();
+    @GetMapping("/session-list")
+    @ResponseBody
+    public Map<String, String> sessionList() {
+        Enumeration elements = sessionList.elements();
+        Map<String, String> lists = new HashMap<>();
+        while(elements.hasMoreElements()) {
+            HttpSession session = (HttpSession)elements.nextElement();
+            lists.put(session.getId(),String.valueOf(session.getAttribute("userId")));
+        }
+
+        return lists;
     }
 }
