@@ -1,7 +1,6 @@
 package test.Springboot_Login.service;
 
 import lombok.RequiredArgsConstructor;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import test.Springboot_Login.domain.User;
