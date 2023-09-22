@@ -27,4 +27,14 @@ public class JoinRequest {
                 .role(UserRole.USER)
                 .build();
     }
+
+    // 비밀번호 암호화
+    public User toEntity(String encodedPassword) {
+        return User.builder()
+                .loginId(this.loginId)
+                .password(encodedPassword)
+                .nickName(this.nickName)
+                .role(UserRole.USER)
+                .build();
+    }
 }
