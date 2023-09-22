@@ -2,10 +2,8 @@ package test.Springboot_Login.auth;
 
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.util.concurrent.CompletableToListenableFutureAdapter;
 import test.Springboot_Login.domain.User;
 
-import javax.swing.plaf.PanelUI;
 import java.util.ArrayList;
 import java.util.Collection;
 
@@ -18,7 +16,7 @@ public class PrincipalDetails implements UserDetails {
     }
 
     @Override
-    public Collection<? extends GrantedAuthority> getAuthorites() {
+    public Collection<? extends GrantedAuthority> getAuthorities() {
         Collection<GrantedAuthority> collections = new ArrayList<>();
         collections.add(() -> {
             return user.getRole().name();
@@ -33,7 +31,7 @@ public class PrincipalDetails implements UserDetails {
     }
 
     @Override
-    public String getUserName() {
+    public String getUsername() {
         return user.getLoginId();
     }
 
