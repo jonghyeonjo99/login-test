@@ -1,7 +1,6 @@
 package test.Springboot_Login.controller;
 
 import jakarta.validation.Valid;
-import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
@@ -59,7 +58,7 @@ public class SecurityLoginController {
         }
         // 닉네임 중복 체크
         if(userService.checkNickNameDuplicate(joinRequest.getNickName())) {
-            bindingResult.addError(new FieldError("joinRequest", "nickname", "닉네임이 중복됩니다."));
+            bindingResult.addError(new FieldError("joinRequest", "nickName", "닉네임이 중복됩니다."));
         }
         // password와 passwordCheck가 같은지 체크
         if(!joinRequest.getPassword().equals(joinRequest.getPasswordCheck())) {
@@ -71,6 +70,7 @@ public class SecurityLoginController {
         }
 
         userService.join2(joinRequest);
+
         return "redirect:/security-login";
     }
 
