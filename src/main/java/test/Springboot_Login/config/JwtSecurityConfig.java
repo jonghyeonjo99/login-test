@@ -3,6 +3,7 @@ package test.Springboot_Login.config;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
@@ -16,8 +17,10 @@ import test.Springboot_Login.service.UserService;
 
 @Configuration
 @EnableWebSecurity
+@EnableMethodSecurity
 @RequiredArgsConstructor
 public class JwtSecurityConfig {
+
     private final UserService userService;
     private static String secretKey = "my-secret-key-1234";
 
@@ -32,8 +35,8 @@ public class JwtSecurityConfig {
                 .addFilterBefore(new JwtTokenFilter(userService, secretKey), UsernamePasswordAuthenticationFilter.class)
                 .authorizeHttpRequests((authorizeHttpRequests) -> authorizeHttpRequests
                         .requestMatchers("/jwt-login/info").authenticated()
-                        .requestMatchers("/jwt-login/admin/**").hasAuthority((UserRole.ADMIN.name())
-                        )
+                        .requestMatchers("/jwt-login/admin/**").hasAuthority((UserRole.ADMIN.name()))
+                        .anyRequest().permitAll()
                 );
 
         return httpSecurity.build();
