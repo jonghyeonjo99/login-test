@@ -29,13 +29,14 @@ public class JwtTokenUtil {
 
     //발급된 token의 만료시간이 지났는지 확인
     public static boolean isExpired(String token, String secretKey) {
-        Date expiredDate = extractClaims((token, secretKey).getExpiration());
-        
+        Date expiredDate = extractClaims(token, secretKey).getExpiration();
+
         return expiredDate.before(new Date());
     }
-    
+
     //secretKey를 사용해 token 파싱
     private static Claims extractClaims(String token, String secretKey) {
+
         return Jwts.parser().setSigningKey(secretKey).parseClaimsJws(token).getBody();
     }
 }
